@@ -51,37 +51,59 @@ import http, { IncomingMessage, ServerResponse } from 'http'
 import fs from 'fs'
 import path from 'path'
 
+// const Database = [
+//     {
+//         id:"1",
+// name: "zion akwubo",
+// stack: "full stack"
+//     },
+//     {
+//         id:"2",
+// name: "wisdom p",
+// stack: "full stack"
+//     },
+//     {
+//         id:"1",
+// name: "ayomide",
+// stack: "full stack"
+//     },
+// ]
+
 
 const port = 2000
 
 const App = http.createServer((req:IncomingMessage, res:ServerResponse<IncomingMessage>)=>{
     res.writeHead(200);
 
-    let connect: string = "/site";
+    let connect: string = "site/";
 
     switch(req.url){
         case "/" :
-        connect += "about.html";
+        connect += "home.html";
         res.statusCode= 200;
         break;
 
         case "/" :
-            connect += "services.html";
+            connect += "service.html";
+            res.statusCode= 200;
+            break;
+        case "/" :
+            connect += "about.html";
             res.statusCode= 200;
             break;
 
             case "/" :
-                connect += "acontacts.html";
+                connect += "contacts.html";
                 res.statusCode= 200;
                 break;
 
-
-    }
+                default: 
+                    connect += "404.html"}
 
     fs.readFile(path.join(__dirname, connect),"utf-8", (error, data)=>{
     if(error){
         console.log("an error occurred", error)
-        res.end();
+       
     }else{
         res.write(data);
         res.end();
@@ -91,6 +113,25 @@ const App = http.createServer((req:IncomingMessage, res:ServerResponse<IncomingM
 
 })
 
-App.listen(port, ()=> {
-    console.log("port is up and running")
+// App.listen(port, ()=> {
+//     console.log("port is up and running")
+// 
+
+// if(req.url === "/" && req.method === "GET" && res.statusCode === 200) {
+// res.setHeader("Content-Type", "application/json");
+// res.write(JSON.stringify(Database))
+// res.end();
+// } 
+
+// res.end();
+
+// })
+
+App.listen(port, ()=>{
+    console.log("port is up and running", port)
 })
+
+
+
+
+
